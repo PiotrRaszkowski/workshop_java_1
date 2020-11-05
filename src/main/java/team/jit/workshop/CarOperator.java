@@ -11,9 +11,15 @@ public class CarOperator {
     }
 
     public void engineStart() {
-        car.setEngineStarted(true);
+        System.out.println("Engine state = " + engineManager.getEngineState());
 
-        engineManager.afterEngineStarted();
+        if (engineManager.getEngineState() == EngineState.FAILURE) {
+            System.out.println("SYSTEM FAILURE! UNABLE TO START!");
+        } else {
+            car.setEngineStarted(true);
+
+            engineManager.afterEngineStarted();
+        }
     }
 
     public void engineStop() {

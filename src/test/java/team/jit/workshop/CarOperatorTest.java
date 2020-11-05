@@ -2,14 +2,23 @@ package team.jit.workshop;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.*;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ExtendWith(MockitoExtension.class)
 class CarOperatorTest {
 
-    private Car car;
+    private Car car = new Car();
 
-    @BeforeEach
+    @Mock
+    private EngineManager engineManager;
+
+    @InjectMocks
+    private CarOperator carOperator = new CarOperator(car);
+
+//    @BeforeEach
     void beforeEach() {
         car = new Car();
         car.setModel("default model!");
@@ -17,29 +26,41 @@ class CarOperatorTest {
         System.out.println(car);
     }
 
-    @BeforeAll
+//    @BeforeAll
     static void setupClass() {
         System.out.println("Before class!");
     }
 
-    @AfterEach
+//    @AfterEach
     void afterEach() {
         car = null;
 
         System.out.println("Car deleted!");
     }
 
-    @AfterAll
+//    @AfterAll
     static void afterAll() {
         System.out.println("After my test class!");
+    }
+
+    @Test
+    public void engineStartWhenEngineFailureThenNotStarted() {
+        //GIVEN
+        Mockito.doReturn(EngineState.FAILURE).when(engineManager).getEngineState();
+
+        //WHEN
+        carOperator.engineStart();
+
+        //THEN
+        assertFalse(car.isEngineStarted());
+
+        Mockito.verify(engineManager, Mockito.never()).afterEngineStarted();
     }
 
     @Test
     public void engineStopWhenEngineStarted() {
         //GIVEN
         car.setEngineStarted(true);
-
-        CarOperator carOperator = new CarOperator(car);
 
         //WHEN
         carOperator.engineStop();
