@@ -5,6 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.swing.*;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,7 +51,20 @@ class CarOperatorTest {
         Mockito.doReturn(EngineState.FAILURE).when(engineManager).getEngineState();
 
         //WHEN
-        carOperator.engineStart();
+        car.setModel("");
+        Exception exception = assertThrows(Exception.class, () -> carOperator.engineStart());
+
+        assertEquals(ModelIsEmptyException.class, exception.getClass());
+
+//        try {
+//            car.setModel("");
+//
+//            carOperator.engineStart();
+//        } catch (UnableToStartEngineException | NoModelProvidedException e) {
+//            System.out.println("Unable to start");
+//        } catch (ModelIsEmptyException e) {
+//            System.out.println("model is empty!");
+//        }
 
         //THEN
         assertFalse(car.isEngineStarted());

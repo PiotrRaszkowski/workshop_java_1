@@ -10,11 +10,19 @@ public class CarOperator {
         this.car = car;
     }
 
-    public void engineStart() {
+    public void engineStart() throws UnableToStartEngineException, NoModelProvidedException {
         System.out.println("Engine state = " + engineManager.getEngineState());
 
+        if (car.getModel() == null) {
+            throw new NoModelProvidedException();
+        }
+
+        if (car.getModel().isEmpty()) {
+            throw new ModelIsEmptyException();
+        }
+
         if (engineManager.getEngineState() == EngineState.FAILURE) {
-            System.out.println("SYSTEM FAILURE! UNABLE TO START!");
+           throw new UnableToStartEngineException();
         } else {
             car.setEngineStarted(true);
 
