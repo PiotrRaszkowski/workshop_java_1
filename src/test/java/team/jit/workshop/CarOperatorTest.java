@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 class CarOperatorTest {
 
-    private Car car = new Car();
+    private Car car = Car.builder().build();
 
     @Mock
     private EngineManager engineManager;
@@ -25,8 +25,8 @@ class CarOperatorTest {
 
 //    @BeforeEach
     void beforeEach() {
-        car = new Car();
-        car.setModel("default model!");
+        car = Car.builder().build();
+//        car.setModel("default model!");
 
         System.out.println(car);
     }
@@ -54,7 +54,7 @@ class CarOperatorTest {
         Mockito.doReturn(EngineState.FAILURE).when(engineManager).getEngineState();
 
         //WHEN
-        car.setModel("");
+//        car.setModel("");
         Exception exception = assertThrows(Exception.class, () -> carOperator.engineStart());
 
         assertEquals(ModelIsEmptyException.class, exception.getClass());
@@ -78,7 +78,7 @@ class CarOperatorTest {
     @Test
     public void engineStopWhenEngineStarted() {
         //GIVEN
-        car.setEngineStarted(true);
+//        car.setEngineStarted(true);
 
         //WHEN
         carOperator.engineStop();

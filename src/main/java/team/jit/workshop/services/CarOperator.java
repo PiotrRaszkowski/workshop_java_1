@@ -16,41 +16,29 @@ public class CarOperator {
         this.car = car;
     }
 
-    public void printCarInfo() throws UnableToStartEngineException, NoModelProvidedException  {
-        if (car.getModel() == null) {
-            throw new NoModelProvidedException();
-        }
-
-        if (car.getModel().isEmpty()) {
-            throw new ModelIsEmptyException();
-        }
-
-        System.out.println("Car operates on model = " + car.getModel());
-    }
-
     public void engineStart() throws UnableToStartEngineException {
         System.out.println("Engine state = " + engineManager.getEngineState());
 
         if (engineManager.getEngineState() == EngineState.FAILURE) {
            throw new UnableToStartEngineException();
         } else {
-            car.setEngineStarted(true);
+//            car.setEngineStarted(true);
 
             engineManager.afterEngineStarted();
         }
     }
 
     public void engineStop() {
-        car.setEngineStarted(false);
+//        car.setEngineStarted(false);
 
         engineManager.afterEngineStopped();
     }
 
     public void lightsOn() {
-        car.setLightsOn(true);
+//        car.setLightsOn(true);
     }
 
     public void lightsOff() {
-        car.setLightsOn(false);
+//        car.setLightsOn(false);
     }
 }

@@ -36,7 +36,7 @@ public class BenchmarkTest {
                 .warmupTime(TimeValue.seconds(1))
                 .warmupIterations(6)
                 .threads(1)
-                .measurementIterations(6)
+                .measurementIterations(1)
                 .forks(1)
                 .shouldFailOnError(true)
                 .shouldDoGC(true)
