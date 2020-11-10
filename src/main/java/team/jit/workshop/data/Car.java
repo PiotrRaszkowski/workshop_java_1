@@ -1,4 +1,4 @@
-package team.jit.workshop;
+package team.jit.workshop.data;
 
 import lombok.Getter;
 import lombok.Setter;

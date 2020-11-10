@@ -4,8 +4,11 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.*;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import javax.swing.*;
+import team.jit.workshop.data.Car;
+import team.jit.workshop.data.EngineState;
+import team.jit.workshop.exceptions.ModelIsEmptyException;
+import team.jit.workshop.services.CarOperator;
+import team.jit.workshop.services.EngineManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 

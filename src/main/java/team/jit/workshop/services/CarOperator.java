@@ -1,4 +1,10 @@
-package team.jit.workshop;
+package team.jit.workshop.services;
+
+import team.jit.workshop.data.EngineState;
+import team.jit.workshop.data.Car;
+import team.jit.workshop.exceptions.ModelIsEmptyException;
+import team.jit.workshop.exceptions.NoModelProvidedException;
+import team.jit.workshop.exceptions.UnableToStartEngineException;
 
 public class CarOperator {
 
@@ -10,9 +16,7 @@ public class CarOperator {
         this.car = car;
     }
 
-    public void engineStart() throws UnableToStartEngineException, NoModelProvidedException {
-        System.out.println("Engine state = " + engineManager.getEngineState());
-
+    public void printCarInfo() throws UnableToStartEngineException, NoModelProvidedException  {
         if (car.getModel() == null) {
             throw new NoModelProvidedException();
         }
@@ -20,6 +24,12 @@ public class CarOperator {
         if (car.getModel().isEmpty()) {
             throw new ModelIsEmptyException();
         }
+
+        System.out.println("Car operates on model = " + car.getModel());
+    }
+
+    public void engineStart() throws UnableToStartEngineException {
+        System.out.println("Engine state = " + engineManager.getEngineState());
 
         if (engineManager.getEngineState() == EngineState.FAILURE) {
            throw new UnableToStartEngineException();

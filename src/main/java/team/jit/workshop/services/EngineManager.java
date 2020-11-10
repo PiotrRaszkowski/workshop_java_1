@@ -1,4 +1,6 @@
-package team.jit.workshop;
+package team.jit.workshop.services;
+
+import team.jit.workshop.data.EngineState;
 
 public class EngineManager {
 

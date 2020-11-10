@@ -1,4 +1,4 @@
-package team.jit.workshop;
+package team.jit.workshop.data;
 
 public enum EngineState {
     FAILURE,
